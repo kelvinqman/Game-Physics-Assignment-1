@@ -17,6 +17,9 @@ PlayScene::~PlayScene()
 
 void PlayScene::draw()
 {
+	// PlayScene.cpp -> draw()
+	TextureManager::Instance()->draw("background", 400, 300, 0, 255, true);
+
 	if(EventManager::Instance().isIMGUIActive())
 	{
 		GUI_Function();
@@ -174,6 +177,9 @@ void PlayScene::start()
 	m_pInstructionsLabel->getTransform()->position = glm::vec2(Config::SCREEN_WIDTH * 0.5f, 500.0f);
 
 	addChild(m_pInstructionsLabel);
+
+	// PlayScene.cpp -> start()
+	TextureManager::Instance()->load("../Assets/textures/background.png", "background");
 }
 
 void PlayScene::GUI_Function() const
