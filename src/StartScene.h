@@ -27,6 +27,8 @@ private:
 	Ship* m_pShip{};
 
 	Button* m_pStartButton;
+	// StartScene.h -> private:
+	Label* m_pTeamMember1{}, * m_pTeamMember2{};
 };
 
 #endif /* defined (__START_SCENE__) */
