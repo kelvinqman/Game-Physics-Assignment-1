@@ -246,13 +246,21 @@ void PlayScene::GUI_Function() const
 
 	ImGui::Separator();
 
-	static float float3[3] = { 0.0f, 1.0f, 1.5f };
-	if(ImGui::SliderFloat3("My Slider", float3, 0.0f, 2.0f))
-	{
-		std::cout << float3[0] << std::endl;
-		std::cout << float3[1] << std::endl;
-		std::cout << float3[2] << std::endl;
-		std::cout << "---------------------------\n";
+	// PlayScene.cpp -> GUI_Function()
+	static bool isGravityEnabled = m_pTarget->getGravityFlag();
+	if (ImGui::Checkbox("Gravity", &isGravityEnabled)) {
+		m_pTarget->setGravity(isGravityEnabled);
+	}
+	static float distance[1] = { 0.0f };
+	ImGui::SliderFloat("Distance to StormTrooper", distance, 0, 1200 - 40 - 50);
+	static float velocity[1] = { 0.0f };
+	ImGui::SliderFloat("Throw Speed", velocity, 0, 100);
+	static float angle[1] = { 0.0f };
+	ImGui::SliderFloat("Throw Angle", angle, 0, 90);
+	if (ImGui::Button("Throw with manipulated speed and angle")) {
+		m_pTarget->reSet();
+		m_pTarget->throwWithSpeed(velocity[0], angle[0] / 180 * 3.14);
+		m_pPlaneSprite->getTransform()->position.x = distance[0] + 50.0f;
 	}
 	
 	ImGui::End();

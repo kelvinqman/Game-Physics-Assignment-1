@@ -80,3 +80,11 @@ void Target::reSet() {
 	getRigidBody()->acceleration = glm::vec2(0.0f, 0.0f);
 	pause = false;
 }
+// Target.cpp -> member function
+void Target::throwWithSpeed(float speed, float angle)
+{
+	getRigidBody()->velocity.x = speed * cos(angle);
+	getRigidBody()->velocity.y = -speed * sin(angle);
+	getRigidBody()->acceleration.x = 0;
+	getRigidBody()->acceleration.y = isGravityEnabled ? gravity : 0;
+}

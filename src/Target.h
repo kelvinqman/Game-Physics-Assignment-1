@@ -21,6 +21,10 @@ public:
 	// Target.h -> public:
 	void setPause(bool flag) { pause = flag; }
 	bool getPauseFlag() { return pause; }
+	// Target.h -> public:
+	void setGravity(bool flag) { isGravityEnabled = flag; }
+	bool getGravityFlag() { return isGravityEnabled; }
+	void throwWithSpeed(float speed, float angle);
 private:
 	void m_move();
 	void m_checkBounds();
@@ -34,6 +38,8 @@ private:
 	float floor = 500.0f;
 	// Target.h -> private:
 	bool pause = false;
+	// Target.h -> private:
+	bool isGravityEnabled = false;
 };
 
 
