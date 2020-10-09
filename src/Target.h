@@ -18,6 +18,9 @@ public:
 	void beThrowedToReachST();
 	void beThrowedInMaxDistance();
 	void reSet();
+	// Target.h -> public:
+	void setPause(bool flag) { pause = flag; }
+	bool getPauseFlag() { return pause; }
 private:
 	void m_move();
 	void m_checkBounds();
@@ -29,6 +32,8 @@ private:
 	float angle = 45.0f / 180 * 3.14;
 	float gravity = 9.8f * scale;
 	float floor = 500.0f;
+	// Target.h -> private:
+	bool pause = false;
 };
 
 

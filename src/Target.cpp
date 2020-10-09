@@ -31,7 +31,8 @@ void Target::draw()
 
 void Target::update()
 {
-	m_move();
+	// Target.cpp -> update()
+	if (!pause) m_move();
 	m_checkBounds();
 }
 
@@ -77,5 +78,5 @@ void Target::reSet() {
 	getTransform()->position = glm::vec2(50.0f, floor);
 	getRigidBody()->velocity = glm::vec2(0.0f, 0.0f);
 	getRigidBody()->acceleration = glm::vec2(0.0f, 0.0f);
-	//pause = false;
+	pause = false;
 }

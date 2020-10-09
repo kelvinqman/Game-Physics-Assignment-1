@@ -222,6 +222,27 @@ void PlayScene::GUI_Function() const
 	if (ImGui::Button("Reset")) {
 		m_pTarget->reSet();
 	}
+	// PlayScene.cpp -> GUI_Function()
+	ImGui::SameLine();
+	if (ImGui::Button(m_pTarget->getPauseFlag() ? "resume" : "pause")) {
+		m_pTarget->setPause(!m_pTarget->getPauseFlag());
+	}
+	std::string str1 = " X: " + std::to_string(m_pTarget->getTransform()->position.x)
+		+ " Y: " + std::to_string(m_pTarget->getTransform()->position.y);
+	const char* cstr1 = str1.c_str();
+	ImGui::LabelText("Position", cstr1);
+	std::string str2 = " X: " + std::to_string(m_pTarget->getRigidBody()->velocity.x)
+		+ " Y: " + std::to_string(m_pTarget->getRigidBody()->velocity.y);
+	const char* cstr2 = str2.c_str();
+	ImGui::LabelText("Velocity", cstr2);
+	std::string str3 = " X: " + std::to_string(m_pTarget->getRigidBody()->acceleration.x)
+		+ " Y: " + std::to_string(m_pTarget->getRigidBody()->acceleration.y);
+	const char* cstr3 = str3.c_str();
+	ImGui::LabelText("Acceleration", cstr3);
+	std::string str4 = " X: " + std::to_string(m_pPlaneSprite->getTransform()->position.x - m_pTarget->getTransform()->position.x)
+		+ " Y: " + std::to_string(m_pPlaneSprite->getTransform()->position.y - m_pTarget->getTransform()->position.y);
+	const char* cstr4 = str4.c_str();
+	ImGui::LabelText("Distance between thermal detonator and stormtrooper", cstr4);
 
 	ImGui::Separator();
 
