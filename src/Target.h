@@ -14,10 +14,21 @@ public:
 	virtual void update() override;
 	virtual void clean() override;
 
+	// Target.h -> public:
+	void beThrowedToReachST();
+	void beThrowedInMaxDistance();
+	void reSet();
 private:
 	void m_move();
 	void m_checkBounds();
 	void m_reset();
+
+	// Target.h -> private:
+	float scale = 1.0f;
+	float velocity = 95.0f * scale;
+	float angle = 45.0f / 180 * 3.14;
+	float gravity = 9.8f * scale;
+	float floor = 500.0f;
 };
 
 

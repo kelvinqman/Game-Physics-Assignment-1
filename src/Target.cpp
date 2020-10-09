@@ -41,7 +41,15 @@ void Target::clean()
 
 void Target::m_move()
 {
-	getTransform()->position = getTransform()->position + getRigidBody()->velocity * 5.0f;
+	// Target.cpp -> m_move()
+	if (getTransform()->position.y > floor)
+	{
+		getRigidBody()->velocity = glm::vec2(0.0f, 0.0f);
+		getRigidBody()->acceleration = glm::vec2(0.0f, 0.0f);
+	}
+	float deltaTime = 1.0f / 20.0f;
+	getRigidBody()->velocity += (getRigidBody()->acceleration) * deltaTime;
+	getTransform()->position += getRigidBody()->velocity * deltaTime;
 }
 
 void Target::m_checkBounds()
@@ -50,4 +58,24 @@ void Target::m_checkBounds()
 
 void Target::m_reset()
 {
+}
+
+// Target.cpp -> member function
+void Target::beThrowedToReachST() {
+	getRigidBody()->velocity.x = 95 * cos(74.1 / 180 * 3.14);
+	getRigidBody()->velocity.y = -95 * sin(74.1 / 180 * 3.14);
+	getRigidBody()->acceleration.x = 0.0f;
+	getRigidBody()->acceleration.y = gravity;
+}
+void Target::beThrowedInMaxDistance() {
+	getRigidBody()->velocity.x = velocity * cos(angle);
+	getRigidBody()->velocity.y = -velocity * sin(angle);
+	getRigidBody()->acceleration.x = 0.0f;
+	getRigidBody()->acceleration.y = gravity;
+}
+void Target::reSet() {
+	getTransform()->position = glm::vec2(50.0f, floor);
+	getRigidBody()->velocity = glm::vec2(0.0f, 0.0f);
+	getRigidBody()->acceleration = glm::vec2(0.0f, 0.0f);
+	//pause = false;
 }

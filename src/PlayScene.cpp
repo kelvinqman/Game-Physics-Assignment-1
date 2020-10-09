@@ -115,6 +115,18 @@ void PlayScene::handleEvents()
 	{
 		TheGame::Instance()->changeSceneState(END_SCENE);
 	}
+
+	// PlayScene.cpp -> handleEvents()
+	if (EventManager::Instance().isKeyDown(SDL_SCANCODE_N)) pressed[0] = true;
+	if (EventManager::Instance().isKeyUp(SDL_SCANCODE_N) && pressed[0]) {
+		m_pTarget->beThrowedToReachST();
+		pressed[0] = false;
+	}
+	if (EventManager::Instance().isKeyDown(SDL_SCANCODE_M)) pressed[1] = true;
+	if (EventManager::Instance().isKeyUp(SDL_SCANCODE_M) && pressed[1]) {
+		m_pTarget->beThrowedInMaxDistance();
+		pressed[1] = false;
+	}
 }
 
 void PlayScene::start()
@@ -180,6 +192,13 @@ void PlayScene::start()
 
 	// PlayScene.cpp -> start()
 	TextureManager::Instance()->load("../Assets/textures/background.png", "background");
+
+	// PlayScene.cpp -> start()
+	m_pTarget = new Target;
+	addChild(m_pTarget);
+	m_pPlayer->getTransform()->position = glm::vec2(20.0f, 500.0f);
+	m_pTarget->getTransform()->position = glm::vec2(50.0f, 500.0f);
+	m_pPlaneSprite->getTransform()->position = glm::vec2(485.0f + 50.0f, 500.0f);
 }
 
 void PlayScene::GUI_Function() const
@@ -190,11 +209,18 @@ void PlayScene::GUI_Function() const
 	// See examples by uncommenting the following - also look at imgui_demo.cpp in the IMGUI filter
 	//ImGui::ShowDemoWindow();
 	
-	ImGui::Begin("Your Window Title Goes Here", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
-
-	if(ImGui::Button("My Button"))
-	{
-		std::cout << "My Button Pressed" << std::endl;
+	// PlayScene.cpp -> GUI_Function()
+	ImGui::Begin("Physics Control", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
+	if (ImGui::Button("Throw in 95m/s velocity to reach Stormtrooper")) {
+		m_pTarget->reSet();
+		m_pTarget->beThrowedToReachST();
+	}
+	if (ImGui::Button("Throw with Max distance in 95m/s velocity")) {
+		m_pTarget->reSet();
+		m_pTarget->beThrowedInMaxDistance();
+	}
+	if (ImGui::Button("Reset")) {
+		m_pTarget->reSet();
 	}
 
 	ImGui::Separator();

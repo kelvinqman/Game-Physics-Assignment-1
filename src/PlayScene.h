@@ -7,6 +7,8 @@
 #include "Player.h"
 #include "Button.h"
 #include "Label.h"
+// PlayScene.h -> header
+#include "Target.h"
 
 class PlayScene : public Scene
 {
@@ -35,6 +37,10 @@ private:
 	Button* m_pBackButton;
 	Button* m_pNextButton;
 	Label* m_pInstructionsLabel;
+
+	// PlayScene.h -> private:
+	Target* m_pTarget;
+	bool pressed[2] = { false,false };
 };
 
 #endif /* defined (__PLAY_SCENE__) */
